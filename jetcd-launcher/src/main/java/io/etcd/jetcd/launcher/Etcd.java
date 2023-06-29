@@ -16,14 +16,10 @@
 
 package io.etcd.jetcd.launcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
 import org.testcontainers.containers.Network;
+import org.testcontainers.shaded.com.google.common.base.Strings;
+
+import java.util.*;
 
 public final class Etcd {
     public static final String CONTAINER_IMAGE = "gcr.io/etcd-development/etcd:v3.5.9";
@@ -89,6 +85,11 @@ public final class Etcd {
         }
 
         public EtcdCluster build() {
+            String imagePro = System.getProperty("ETCD_IMAGE");
+            if(!Strings.isNullOrEmpty(imagePro)){
+                image=imagePro;
+            }
+
             return new EtcdClusterImpl(
                 image,
                 clusterName,
