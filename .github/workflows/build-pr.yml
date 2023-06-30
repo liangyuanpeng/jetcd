@@ -54,8 +54,7 @@ jobs:
           distribution: 'temurin'
       - name: Build Project
         env:
-          - name: ETCD_IMAGE
-            value: {{ matrix.etcd }}
+          ETCD_IMAGE: {{ matrix.etcd }}
         run: |
           export TC_USER="$(id -u):$(id -g)"
           echo "tc user -> $TC_USER"
