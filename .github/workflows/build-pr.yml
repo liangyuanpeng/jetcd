@@ -42,8 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        etcd:
-          - gcr.io/etcd-development/etcd:v3.5.9
+          -
           - gcr.io/etcd-development/etcd:v3.4.26
     steps:
       - name: Checkout
@@ -54,9 +53,12 @@ jobs:
           java-version: 11
           distribution: 'temurin'
       - name: Build Project
+        env:
+          - name: ETCD_IMAGE
+            value: {{ matrix.etcd }}
         run: |
           export TC_USER="$(id -u):$(id -g)"
           echo "tc user -> $TC_USER"
           
           ./gradlew check -x test
-          ./gradlew test -DETCD_IMAGE={{ matrix.etcd }}
+          ./gradlew test
