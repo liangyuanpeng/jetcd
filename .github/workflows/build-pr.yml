@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          -
+          - gcr.io/etcd-development/etcd:v3.5.9
           - gcr.io/etcd-development/etcd:v3.4.26
     steps:
       - name: Checkout
