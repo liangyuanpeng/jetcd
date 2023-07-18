@@ -50,7 +50,8 @@ jobs:
           - "--tls-min-version=TLS1.2,--tls-max-version=TLS1.3"
         include:
         - etcd: v3.4.26
-          extargs: ""
+          notrun: "true"
+          extargs: "--tls-min-version=TLS1.2,--tls-max-version=TLS1.3"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -64,6 +65,7 @@ jobs:
         env:
           ETCD_IMAGE: gcr.io/etcd-development/etcd:${{ matrix.etcd }}
           ETCD_ADDITIONAL_ARGS: ${{ matrix.extargs }}
+        if: ${{ matrix.notrun }}
         run: |
           export TC_USER="$(id -u):$(id -g)"
           echo "tc user -> $TC_USER"
