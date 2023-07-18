@@ -16,15 +16,10 @@
 
 package io.etcd.jetcd.launcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
 import org.testcontainers.containers.Network;
 import org.testcontainers.shaded.com.google.common.base.Strings;
+
+import java.util.*;
 
 public final class Etcd {
     public static final String CONTAINER_IMAGE = "gcr.io/etcd-development/etcd:v3.5.9";
@@ -43,6 +38,14 @@ public final class Etcd {
         return CONTAINER_IMAGE;
     }
 
+    private static List<String> resolveContainerAdditionalArgs() {
+        String env =  System.getenv("ETCD_ADDITIONAL_ARGS");
+        if(!Strings.isNullOrEmpty(env)){
+            return Arrays.asList(env.split(","));
+        }
+        return Collections.emptyList();
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -53,7 +56,7 @@ public final class Etcd {
         private String prefix;
         private int nodes = 1;
         private boolean ssl = false;
-        private List<String> additionalArgs;
+        private List<String> additionalArgs = Etcd.resolveContainerAdditionalArgs();
         private Network network;
         private boolean shouldMountDataDirectory = true;
 
