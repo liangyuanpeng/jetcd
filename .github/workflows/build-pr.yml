@@ -66,3 +66,4 @@ jobs:
           
           ./gradlew check -x test
           ./gradlew test
+          echo "extargs:"${{ matrix.extargs }}
