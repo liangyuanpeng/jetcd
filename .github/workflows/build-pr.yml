@@ -50,6 +50,7 @@ jobs:
           - "--tls-min-version=TLS1.2,--tls-max-version=TLS1.3"
         include:
         - etcd: v3.4.26
+          extargs: ""
     steps:
       - name: Checkout
         uses: actions/checkout@v3
