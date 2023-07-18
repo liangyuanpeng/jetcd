@@ -16,10 +16,10 @@
 
 package io.etcd.jetcd.launcher;
 
+import java.util.*;
+
 import org.testcontainers.containers.Network;
 import org.testcontainers.shaded.com.google.common.base.Strings;
-
-import java.util.*;
 
 public final class Etcd {
     public static final String CONTAINER_IMAGE = "gcr.io/etcd-development/etcd:v3.5.9";
@@ -39,8 +39,8 @@ public final class Etcd {
     }
 
     private static List<String> resolveContainerAdditionalArgs() {
-        String env =  System.getenv("ETCD_ADDITIONAL_ARGS");
-        if(!Strings.isNullOrEmpty(env)){
+        String env = System.getenv("ETCD_ADDITIONAL_ARGS");
+        if (!Strings.isNullOrEmpty(env)) {
             return Arrays.asList(env.split(","));
         }
         return Collections.emptyList();
