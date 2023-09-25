@@ -16,6 +16,15 @@
 
 package io.etcd.jetcd.launcher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.BindMode;
+import org.testcontainers.containers.ContainerLaunchException;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.SelinuxContext;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
+import org.testcontainers.containers.wait.strategy.Wait;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -27,26 +36,10 @@ import java.nio.file.Path;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testcontainers.containers.BindMode;
-import org.testcontainers.containers.ContainerLaunchException;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.SelinuxContext;
-import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.strategy.Wait;
 
 public class EtcdContainer extends GenericContainer<EtcdContainer> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EtcdContainer.class);
@@ -116,7 +109,7 @@ public class EtcdContainer extends GenericContainer<EtcdContainer> {
             withCreateContainerCmdModifier(c -> c.withUser(user));
         }
 
-        waitingFor(Wait.forLogMessage(".*ready to serve client requests.*", 1));
+        waitingFor(Wait.forLogMessage(".*ready to serve client requests.*", 5));
     }
 
     private Path createDataDirectory(String name) {
