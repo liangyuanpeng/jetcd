@@ -16,7 +16,6 @@
 
 package io.etcd.jetcd.launcher.test;
 
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import io.etcd.jetcd.launcher.Etcd;
@@ -54,8 +53,8 @@ public class EtcdClusterStartTest {
         }
     }
 
-    //    @Test
-    @RepeatedTest(30)
+    @Test
+    //    @RepeatedTest(30)
     public void testContainerShouldNotMountDirectory() {
         try (EtcdCluster etcd = Etcd.builder().withClusterName(getClass().getSimpleName()).withMountedDataDirectory(false)
             .build()) {
