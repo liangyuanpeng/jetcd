@@ -109,7 +109,7 @@ public class EtcdContainer extends GenericContainer<EtcdContainer> {
             withCreateContainerCmdModifier(c -> c.withUser(user));
         }
 
-        waitingFor(Wait.forLogMessage(".*ready to serve client requests.*", 5));
+        waitingFor(Wait.forLogMessage(".*ready to serve client requests.*", 1));
     }
 
     private Path createDataDirectory(String name) {
@@ -207,7 +207,9 @@ public class EtcdContainer extends GenericContainer<EtcdContainer> {
 
         try {
             super.start();
-            execInContainer("chmod", "o+rwx", "-R", Etcd.ETCD_DATA_DIR);
+            if (shouldMountDataDirectory) {
+                execInContainer("chmod", "o+rwx", "-R", Etcd.ETCD_DATA_DIR);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
