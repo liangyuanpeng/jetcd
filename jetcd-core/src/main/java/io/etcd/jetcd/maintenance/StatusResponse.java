@@ -16,8 +16,6 @@
 
 package io.etcd.jetcd.maintenance;
 
-import java.net.URI;
-
 import io.etcd.jetcd.Maintenance;
 import io.etcd.jetcd.impl.AbstractResponse;
 
