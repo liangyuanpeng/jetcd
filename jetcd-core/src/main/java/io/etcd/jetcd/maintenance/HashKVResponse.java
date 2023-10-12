@@ -22,7 +22,7 @@ import io.etcd.jetcd.Maintenance;
 import io.etcd.jetcd.impl.AbstractResponse;
 
 /**
- * HashKVResponse returned by {@link Maintenance#hashKV(URI, long)}.
+ * HashKVResponse returned by {@link Maintenance#hashKV(String, long)}.
  */
 public class HashKVResponse extends AbstractResponse<io.etcd.jetcd.api.HashKVResponse> {
 
