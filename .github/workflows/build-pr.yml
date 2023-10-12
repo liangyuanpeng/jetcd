@@ -75,3 +75,6 @@ jobs:
 
           ./gradlew check -x test
           ./gradlew test
+      - name: Publish Snapshot to local maven
+        run: |
+          ./gradlew publishToMavenLocal
