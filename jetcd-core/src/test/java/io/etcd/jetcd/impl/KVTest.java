@@ -62,6 +62,7 @@ public class KVTest {
     public static final EtcdClusterExtension cluster = EtcdClusterExtension.builder()
         .withNodes(1)
         .build();
+    
 
     private static KV kvClient;
 

@@ -50,9 +50,7 @@ import static org.awaitility.Awaitility.await;
 public class LeaseTest {
 
     @RegisterExtension
-    public final EtcdClusterExtension cluster = EtcdClusterExtension.builder()
-        .withNodes(3)
-        .build();
+    public final EtcdClusterExtension cluster = null;
 
     private KV kvClient;
     private Client client;
